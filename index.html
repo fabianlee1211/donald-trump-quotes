@@ -50,7 +50,7 @@
             to { opacity: 1; }
         }
     </style>
-    <title>Random Quote</title>
+    <title>Donald Trump Quotes</title>
 </head>
 <body class="bg-dark">
     <div id="overlay"></div>
@@ -68,36 +68,36 @@
         </div>
     </div>
     <script>
-        let quote = document.querySelector("#quote");
-        let body = document.querySelector("body");
+        let quote = document.querySelector('#quote');
+        let body = document.querySelector('body');
         let quoteText = document.querySelector('#quoteText');
         let quoteBy = document.querySelector('#quoteBy');
-        let quoteCategory = document.querySelector("#quoteCategory");
+        let quoteCategory = document.querySelector('#quoteCategory');
         let nextQuote = document.querySelector('#nextQuote');
-        let tweet = document.querySelector(".twitter");
-        let author = "";
+        let tweet = document.querySelector('.twitter');
+        let author = '';
         fetchQuote();
         
-        body.classList.add("animate");
+        body.classList.add('animate');
         nextQuote.addEventListener('click', fetchQuote);
         tweet.addEventListener('click', shareTweet);
         function fetchQuote() {
-            if (quote.classList.contains("animate")) quote.classList.remove("animate");
+            if (quote.classList.contains('animate')) quote.classList.remove('animate');
             fetch(`https://api.whatdoestrumpthink.com/api/v1/quotes/random`)
                 .then(response => response.json())
                 .then(response => {
                     quoteText.innerHTML = response.message;
                     author = 'Donald J Trump';
-                    quoteBy.innerHTML = "- " + author + " -";
-                    quote.classList.add("animate");
+                    quoteBy.innerHTML = `- ${author} -`;
+                    quote.classList.add('animate');
                 })
                 .catch(err => console.log(err));
         }
         function shareTweet() {
-            let url = "https://twitter.com/intent/tweet";
-            let text = '"'+ quoteText.innerHTML + '" ' + "- " + author;
-            let hashtags = quoteCategory.innerHTML;
-            window.open(url+"?text="+text+";hashtags="+hashtags,"","width:600,height:500");
+            let url = 'https://twitter.com/intent/tweet';
+            let text = `"${quoteText.innerHTML}" - ${author}`;
+            let hashtags = 'trumpquotes';
+            window.open(`${url}?text=${text};hashtags=${hashtags}`,'','width:600,height:500');
         }
     </script>
 </body>
